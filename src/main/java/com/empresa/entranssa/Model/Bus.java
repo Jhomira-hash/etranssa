@@ -2,6 +2,7 @@ package com.empresa.entranssa.Model;
 
 
 import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -27,6 +28,7 @@ public class Bus {
 
     @ManyToOne
     @JoinColumn(name = "id_ruta", nullable = true)
+    @JsonBackReference(value = "ruta-buses")
     private Ruta ruta;
 
     @ManyToOne

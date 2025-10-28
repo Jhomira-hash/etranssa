@@ -6,6 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
+//para evitar el bucle infinito
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 //@Data
 @Entity
@@ -20,11 +22,13 @@ public class BusConductor {
     @ManyToOne
     @MapsId("id_bus")
     @JoinColumn(name = "id_bus")
+    @JsonBackReference(value = "bus-busConductores")
     private Bus bus;
 
     @ManyToOne
     @MapsId("id_conductor")
     @JoinColumn(name = "id_conductor")
+    @JsonBackReference(value = "conductor-busConductores")
     private Conductor conductor;
 
     @Temporal(TemporalType.DATE)
@@ -32,6 +36,7 @@ public class BusConductor {
 
     @Temporal(TemporalType.DATE)
     private Date fecha_fin;
+
 
 
     public BusConductor() {

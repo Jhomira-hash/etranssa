@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import java.util.List;
 
@@ -23,5 +24,7 @@ public class TipoEstado {
     private String nombre_estado;
 
     @OneToMany(mappedBy = "estado", cascade = CascadeType.ALL)
+    @JsonBackReference(value = "estado-buses")
     private List<Bus> buses;
+
 }

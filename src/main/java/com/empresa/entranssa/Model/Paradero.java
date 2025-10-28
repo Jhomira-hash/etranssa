@@ -1,14 +1,9 @@
 package com.empresa.entranssa.Model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
-//@Data
 @Entity
-//@AllArgsConstructor
-//@NoArgsConstructor
 @Table(name = "Paraderos")
 public class Paradero {
 
@@ -20,22 +15,24 @@ public class Paradero {
     private String nombre_paradero;
 
     private String ubicacion;
-
     private Double latitud;
     private Double longitud;
 
+    // ✅ Esta relación es con Ruta — usa @JsonBackReference aquí
     @ManyToOne
     @JoinColumn(name = "id_ruta")
+    @JsonBackReference(value = "ruta-paraderos") // 👈 este es el correcto
     private Ruta ruta;
 
+    // ✅ Esta relación NO debe tener JsonBackReference
     @ManyToOne
     @JoinColumn(name = "id_tipoEntidad")
     private TipoEntidad tipoEntidad;
 
-    public Paradero() {
-    }
+    public Paradero() {}
 
-    public Paradero(Long id_paradero, String nombre_paradero, String ubicacion, Double latitud, Double longitud, Ruta ruta, TipoEntidad tipoEntidad) {
+    public Paradero(Long id_paradero, String nombre_paradero, String ubicacion,
+                    Double latitud, Double longitud, Ruta ruta, TipoEntidad tipoEntidad) {
         this.id_paradero = id_paradero;
         this.nombre_paradero = nombre_paradero;
         this.ubicacion = ubicacion;

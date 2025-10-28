@@ -1,16 +1,10 @@
 package com.empresa.entranssa.Model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
 import java.util.List;
 
-//@Data
 @Entity
-//@AllArgsConstructor
-//@NoArgsConstructor
 @Table(name = "Rutas")
 public class Ruta {
 
@@ -28,15 +22,19 @@ public class Ruta {
     private String fin_ruta;
 
     @OneToMany(mappedBy = "ruta", cascade = CascadeType.ALL)
+    @JsonManagedReference(value = "ruta-paraderos")
     private List<Paradero> paraderos;
 
     @OneToMany(mappedBy = "ruta", cascade = CascadeType.ALL)
+    @JsonManagedReference(value = "ruta-buses")
     private List<Bus> buses;
 
+    // ✅ Constructores, getters y setters
     public Ruta() {
     }
 
-    public Ruta(Long id_ruta, String nombre_ruta, String descripcion, String inicio_ruta, String fin_ruta, List<Paradero> paraderos, List<Bus> buses) {
+    public Ruta(Long id_ruta, String nombre_ruta, String descripcion, String inicio_ruta, String fin_ruta,
+                List<Paradero> paraderos, List<Bus> buses) {
         this.id_ruta = id_ruta;
         this.nombre_ruta = nombre_ruta;
         this.descripcion = descripcion;
