@@ -1,5 +1,6 @@
 package com.empresa.entranssa.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
@@ -18,13 +19,13 @@ public class Paradero {
     private Double latitud;
     private Double longitud;
 
-    // ✅ Esta relación es con Ruta — usa @JsonBackReference aquí
+
     @ManyToOne
     @JoinColumn(name = "id_ruta")
-    @JsonBackReference(value = "ruta-paraderos") // 👈 este es el correcto
+    @JsonIgnoreProperties("paraderos")
     private Ruta ruta;
 
-    // ✅ Esta relación NO debe tener JsonBackReference
+
     @ManyToOne
     @JoinColumn(name = "id_tipoEntidad")
     private TipoEntidad tipoEntidad;
