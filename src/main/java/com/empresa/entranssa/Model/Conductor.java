@@ -1,5 +1,6 @@
 package com.empresa.entranssa.Model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,7 +8,7 @@ import lombok.NoArgsConstructor;
 
 import java.util.Date;
 import java.util.List;
-
+import com.fasterxml.jackson.annotation.JsonBackReference;
 //@Data
 @Entity
 //@AllArgsConstructor
@@ -31,7 +32,9 @@ public class Conductor {
     private String telefono;
 
     @OneToMany(mappedBy = "conductor", cascade = CascadeType.ALL)
+    @JsonManagedReference(value = "conductor-busConductores")
     private List<BusConductor> busConductores;
+
 
     public Conductor() {
     }
