@@ -17,6 +17,7 @@ public class RutaController {
             this.rutaService = rutaService;
         }
 
+
         @GetMapping
         public List<Ruta> listar() {
             return rutaService.listarTodos();
