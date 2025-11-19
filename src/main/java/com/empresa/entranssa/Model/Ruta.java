@@ -1,5 +1,6 @@
 package com.empresa.entranssa.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import java.util.List;
@@ -17,7 +18,8 @@ public class Ruta {
 
     @Column(columnDefinition = "TEXT")
     private String descripcion;
-
+    //añadir ruta
+    private String mapa;
     private String inicio_ruta;
     private String fin_ruta;
 
@@ -34,7 +36,7 @@ public class Ruta {
     }
 
     public Ruta(Long id_ruta, String nombre_ruta, String descripcion, String inicio_ruta, String fin_ruta,
-                List<Paradero> paraderos, List<Bus> buses) {
+                List<Paradero> paraderos, List<Bus> buses,String mapa) {
         this.id_ruta = id_ruta;
         this.nombre_ruta = nombre_ruta;
         this.descripcion = descripcion;
@@ -42,6 +44,7 @@ public class Ruta {
         this.fin_ruta = fin_ruta;
         this.paraderos = paraderos;
         this.buses = buses;
+        this.mapa=mapa;
     }
 
     public Long getId_ruta() {
@@ -88,6 +91,14 @@ public class Ruta {
         return paraderos;
     }
 
+    public String getMapa() {
+        return mapa;
+    }
+
+    public void setMapa(String mapa) {
+        this.mapa = mapa;
+    }
+
     public void setParaderos(List<Paradero> paraderos) {
         this.paraderos = paraderos;
     }
@@ -95,7 +106,8 @@ public class Ruta {
     public List<Bus> getBuses() {
         return buses;
     }
-
+    @OneToMany(mappedBy = "ruta")
+    @JsonIgnoreProperties({"ruta"})
     public void setBuses(List<Bus> buses) {
         this.buses = buses;
     }

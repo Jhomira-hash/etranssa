@@ -28,7 +28,7 @@ public class Bus {
 
     @ManyToOne
     @JoinColumn(name = "id_ruta", nullable = true)
-    @JsonBackReference(value = "ruta-buses")
+    //@JsonBackReference(value = "ruta-buses")
     private Ruta ruta;
 
     @ManyToOne
