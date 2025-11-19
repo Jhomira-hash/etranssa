@@ -36,10 +36,14 @@ public class Administrador {
     @Column(length = 15)
     private String telefono;
 
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false, length = 20)
+    private Rol rol;
+
     public Administrador( ) {
     }
 
-    public Administrador(Long id_admin, String dni, String nombre, String apellido, String contrasena, String correo, String telefono) {
+    public Administrador(Long id_admin, String dni, String nombre, String apellido, String contrasena, String correo, String telefono, Rol rol) {
         this.id_admin = id_admin;
         this.dni = dni;
         this.nombre = nombre;
@@ -47,6 +51,8 @@ public class Administrador {
         this.contrasena = contrasena;
         this.correo = correo;
         this.telefono = telefono;
+        this.rol = rol;
+
     }
 
     public Long getId_admin() {
@@ -103,5 +109,13 @@ public class Administrador {
 
     public void setTelefono(String telefono) {
         this.telefono = telefono;
+    }
+
+    public Rol getRol() {
+        return rol;
+    }
+
+    public void setRol(Rol rol) {
+        this.rol = rol;
     }
 }

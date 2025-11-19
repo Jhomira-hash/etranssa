@@ -2,6 +2,7 @@ package com.empresa.entranssa.Controller;
 
 import com.empresa.entranssa.Model.Administrador;
 import com.empresa.entranssa.Service.AdministradorService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,8 +25,11 @@ public class AdministradorController {
     }
 
     @PostMapping("/registrar")
-    public Administrador registrar(@RequestBody Administrador administrador) {
-        return administradorService.registrar(administrador);
+    public Administrador registrar(
+            @RequestParam Long idCreador,
+            @RequestBody Administrador nuevoAdmin
+    ) {
+        return administradorService.registrar(nuevoAdmin, idCreador);
     }
 
     @PostMapping("/login")
@@ -39,12 +43,12 @@ public class AdministradorController {
         }
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/id/{id}")
     public Administrador buscar(@PathVariable Long id) {
         return administradorService.buscarPorId(id);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/id/{id}")
     public void eliminar(@PathVariable Long id) {
         administradorService.eliminar(id);
     }
