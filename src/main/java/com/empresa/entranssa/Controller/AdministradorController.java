@@ -32,6 +32,7 @@ public class AdministradorController {
         return administradorService.registrar(nuevoAdmin, idCreador);
     }
 
+
     @PostMapping("/login")
     public String login(@RequestBody Administrador admin) {
         Administrador administrador = administradorService.login(admin.getCorreo(), admin.getContrasena());
