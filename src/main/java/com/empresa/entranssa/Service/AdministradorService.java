@@ -3,6 +3,8 @@ package com.empresa.entranssa.Service;
 import com.empresa.entranssa.Dao.AdministradorDAO;
 import com.empresa.entranssa.Model.Administrador;
 import com.empresa.entranssa.Model.Rol;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -22,6 +24,9 @@ public class AdministradorService {
         return administradorDAO.findAll();
     }
 
+    @Autowired
+    private BCryptPasswordEncoder passwordEncoder;
+
 
     public Administrador registrar(Administrador nuevo, Long idCreador) {
 
@@ -32,8 +37,8 @@ public class AdministradorService {
             throw new ResponseStatusException(HttpStatus.FORBIDDEN, "No tienes permisos para registrar administradores.");
         }
 
+        // VALIDAR CONTRASEÑA SEGURA
         List<String> errores = validarContrasenaSegura(nuevo.getContrasena());
-
         if (!errores.isEmpty()) {
             throw new IllegalArgumentException("Contraseña no segura: " + String.join(", ", errores));
         }
@@ -41,6 +46,10 @@ public class AdministradorService {
         if (nuevo.getRol() == null) {
             throw new RuntimeException("Debes especificar un rol para el nuevo administrador.");
         }
+
+        // 🚨 AQUI SE AGREGA LA ENCRIPTACIÓN 🔥
+        String contraseñaEncriptada = passwordEncoder.encode(nuevo.getContrasena());
+        nuevo.setContrasena(contraseñaEncriptada);
 
         return administradorDAO.save(nuevo);
     }
