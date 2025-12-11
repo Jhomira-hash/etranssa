@@ -51,6 +51,13 @@ public class Bus {
         this.busConductores = busConductores;
     }
 
+    public Bus(Long id_bus, String placa, Integer capacidad, String horario) {
+        this.id_bus = id_bus;
+        this.placa = placa;
+        this.capacidad = capacidad;
+        this.horario = horario;
+    }
+
     public Long getId_bus() {
         return id_bus;
     }
@@ -98,6 +105,8 @@ public class Bus {
     public void setEstado(TipoEstado estado) {
         this.estado = estado;
     }
+    //para looker studio
+
 
     public List<BusConductor> getBusConductores() {
         return busConductores;

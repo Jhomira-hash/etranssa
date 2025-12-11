@@ -20,7 +20,7 @@ public class BusService {
         return busDAO.findAll();
     }
 
-    public Bus guardar(Bus bus) {
+    public Bus guardar(Bus bus ) {
         return busDAO.save(bus);
     }
 
