@@ -4,7 +4,6 @@ import com.empresa.entranssa.Model.Bus;
 import com.empresa.entranssa.Service.BusService;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
-
 @RestController
 @RequestMapping("/api/buses")
 @CrossOrigin(origins = "*")
@@ -21,8 +20,21 @@ public class BusController {
         return busService.listarTodos();
     }
 
-    @PostMapping("/guardar")
-    public Bus registrar(@RequestBody Bus bus) {
+    @PostMapping
+    public Bus crear(@RequestBody Bus bus) {
+        bus.setId_bus(null);
+        return busService.guardar(bus);
+    }
+
+    @PutMapping("/{id}")
+    public Bus actualizar(@PathVariable Long id, @RequestBody Bus bus) {
+        Bus existente = busService.buscarPorId(id);
+
+        if (existente == null) {
+            throw new RuntimeException("No existe bus con id " + id);
+        }
+
+        bus.setId_bus(id);
         return busService.guardar(bus);
     }
 
@@ -36,3 +48,4 @@ public class BusController {
         busService.eliminar(id);
     }
 }
+

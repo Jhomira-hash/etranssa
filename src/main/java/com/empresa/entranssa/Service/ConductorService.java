@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 @Service
 public class ConductorService {
+
     private final ConductorDAO conductorDAO;
 
     public ConductorService(ConductorDAO conductorDAO) {
@@ -15,6 +16,12 @@ public class ConductorService {
 
     public List<Conductor> listarTodos() {
         return conductorDAO.findAll();
+    }
+
+    // NUEVO: método solo para crear
+    public Conductor crear(Conductor conductor) {
+        conductor.setId_conductor(null); // garantizar creación, no actualización
+        return conductorDAO.save(conductor);
     }
 
     public Conductor guardar(Conductor conductor) {

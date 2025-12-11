@@ -27,7 +27,13 @@ public class ConductorController {
             return conductorService.guardar(conductor);
         }
 
-        @GetMapping("/{id}")
+    @PostMapping("/crear")
+    public Conductor crearConductor(@RequestBody Conductor conductor) {
+        return conductorService.crear(conductor);
+    }
+
+
+    @GetMapping("/{id}")
         public Conductor conductor(@PathVariable Long id) {
             return conductorService.buscarPorId(id);
         }
