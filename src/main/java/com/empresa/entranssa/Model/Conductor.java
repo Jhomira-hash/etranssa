@@ -1,5 +1,6 @@
 package com.empresa.entranssa.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -31,21 +32,56 @@ public class Conductor {
 
     private String telefono;
 
+    @Column(nullable = false, unique = true, length = 100)
+    private String correo;
+
+    @Column(nullable = false)
+    private String contrasena;
+
+    private Integer edad;
+
     @OneToMany(mappedBy = "conductor", cascade = CascadeType.ALL)
-    @JsonManagedReference(value = "conductor-busConductores")
+    @JsonIgnore
     private List<BusConductor> busConductores;
 
 
     public Conductor() {
     }
 
-    public Conductor(Long id_conductor, String nombre, String apellido, Date fecha_nacimiento, String telefono, List<BusConductor> busConductores) {
+    public Conductor(Long id_conductor, String nombre, String apellido, Date fecha_nacimiento, String telefono,String correo, String contrasena, Integer edad, List<BusConductor> busConductores) {
         this.id_conductor = id_conductor;
         this.nombre = nombre;
         this.apellido = apellido;
         this.fecha_nacimiento = fecha_nacimiento;
         this.telefono = telefono;
+        this.correo = correo;
+        this.contrasena = contrasena;
+        this.edad = edad;
         this.busConductores = busConductores;
+    }
+
+    public String getCorreo() {
+        return correo;
+    }
+
+    public void setCorreo(String correo) {
+        this.correo = correo;
+    }
+
+    public String getContrasena() {
+        return contrasena;
+    }
+
+    public void setContrasena(String contrasena) {
+        this.contrasena = contrasena;
+    }
+
+    public Integer getEdad() {
+        return edad;
+    }
+
+    public void setEdad(Integer edad) {
+        this.edad = edad;
     }
 
     public Long getId_conductor() {

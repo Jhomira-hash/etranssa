@@ -28,7 +28,7 @@ public class Bus {
 
     @ManyToOne
     @JoinColumn(name = "id_ruta", nullable = true)
-    @JsonBackReference(value = "ruta-buses")
+    //@JsonBackReference(value = "ruta-buses")
     private Ruta ruta;
 
     @ManyToOne
@@ -49,6 +49,13 @@ public class Bus {
         this.ruta = ruta;
         this.estado = estado;
         this.busConductores = busConductores;
+    }
+
+    public Bus(Long id_bus, String placa, Integer capacidad, String horario) {
+        this.id_bus = id_bus;
+        this.placa = placa;
+        this.capacidad = capacidad;
+        this.horario = horario;
     }
 
     public Long getId_bus() {
@@ -98,6 +105,8 @@ public class Bus {
     public void setEstado(TipoEstado estado) {
         this.estado = estado;
     }
+    //para looker studio
+
 
     public List<BusConductor> getBusConductores() {
         return busConductores;
