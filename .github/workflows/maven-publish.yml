@@ -1,0 +1,20 @@
+# This workflow will build a package using Maven and then publish it to GitHub packages when a release is created
+# For more information see: https://github.com/actions/setup-java/blob/main/docs/advanced-usage.md#apache-maven-with-a-settings-path
+
+name: Datos del Estudiante
+
+on:
+  push:
+  - main
+
+jobs:
+ mostrar-datos:
+  runs-on: ubuntu-latest
+  steps:
+    - name: Mostrar informacion
+    run:
+      echo "Nombre del Estudiante: Jhommira Meza"
+      echo "Fecha: ${date}"
+      echo "Nombre del Estudiante: $RUNNER_OS"
+
+
